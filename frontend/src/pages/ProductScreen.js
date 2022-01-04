@@ -1,24 +1,40 @@
-import React,{useEffect, useState} from 'react'
+import React,{useEffect} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { Footer } from '../components/Footer'
 import Navbar from '../components/Navbar'
-import axios from 'axios'
+import { listProductsDetails } from '../actions/productActions'
+import Loader from '../components/Loader'
+import Message from '../components/Message'
 
-const ProductScreen = ({match}) => {
-    const [product, setProduct] = useState([])
+
+const ProductScreen = () => {
+
+    const dispatch = useDispatch()
+    const productDetails = useSelector(state => state.productDetails)
+    const {loading,error,product} = productDetails
+
     let {id} = useParams()
     useEffect(()=> {
-        const fetchProduct = async () => {
-            const {data} = await axios.get(`/api/products/${id}`)
-             setProduct(data)
-        } 
-        fetchProduct()
-     },[id])
+        dispatch(listProductsDetails(id))
+     },[dispatch,id])
+
 
     return (
         <div>
             <Navbar/> 
-            {product.name}
+            {
+                loading ? 
+                <Loader/>:
+                error ? 
+                <Message>{error}</Message>:
+                <div>
+                    {
+                        product &&
+                        <p>{product.name}</p>
+                    }
+                </div>
+            }
             <Footer/> 
         </div>
     )

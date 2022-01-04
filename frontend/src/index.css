@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Spinner */
+.dots-5 {
+    width:12px;
+    height:12px;
+    background: #4334c3;
+    border-radius: 50%;
+    box-shadow: 20px 0 #00000022,-20px 0 #4334c3;
+    animation:d5 1s infinite linear alternate;
+  }
+  @keyframes d5 {
+      0% {box-shadow: 20px 0 #4334c3,-20px 0 #00000022;background: #4334c3}
+      33%{box-shadow: 20px 0 #4334c3,-20px 0 #00000022;background: #00000022}
+      66%{box-shadow: 20px 0 #00000022,-20px 0 #4334c3;background: #00000022}
+  }
