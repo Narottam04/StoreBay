@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar'
 import { listProductsDetails } from '../actions/productActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
+import ProductDetailsUI from '../components/ProductDetailsUI'
 
 
 const ProductScreen = () => {
@@ -31,7 +32,7 @@ const ProductScreen = () => {
                 <div>
                     {
                         product &&
-                        <p>{product.name}</p>
+                        <ProductDetailsUI product = {product}/>
                     }
                 </div>
             }
