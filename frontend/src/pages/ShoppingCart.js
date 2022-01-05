@@ -18,7 +18,7 @@ function ShoppingCart() {
                                 </Link>
                                     <p className="text-5xl font-black leading-10 text-gray-800 pt-3">Bag</p>
                                     <div className="md:flex items-center mt-14 py-8 border-t border-gray-200">
-                                        <div className="w-1/4">
+                                        <div className="w-60">
                                             <img src="https://cdn.tuk.dev/assets/templates/e-commerce-kit/bestSeller3.png" alt className="w-full h-full object-center object-cover" />
                                         </div>
                                         <div className="md:pl-3 md:w-3/4">
@@ -44,7 +44,7 @@ function ShoppingCart() {
                                         </div>
                                     </div>
                                     <div className="md:flex items-center py-8 border-t border-gray-200">
-                                        <div className="w-1/4">
+                                        <div className="w-60">
                                             <img src="https://cdn.tuk.dev/assets/templates/e-commerce-kit/bestSeller2.png" alt className="w-full h-full object-center object-cover" />
                                         </div>
                                         <div className="md:pl-3 md:w-3/4 w-full">
@@ -70,7 +70,7 @@ function ShoppingCart() {
                                         </div>
                                     </div>
                                     <div className="md:flex items-center py-8 border-t border-b border-gray-200">
-                                        <div className="h-full w-1/4">
+                                        <div className="h-full w-60">
                                             <img src="https://cdn.tuk.dev/assets/templates/e-commerce-kit/bestSeller1.png" alt className="w-full h-full object-center object-cover" />
                                         </div>
                                         <div className="md:pl-3 md:w-3/4 w-full">

@@ -123,16 +123,20 @@ export default function Navbar() {
               </div>
 
               <div className="border-t border-gray-200 py-6 px-4 space-y-6">
+                <Link to="/login">
                 <div className="flow-root">
                   <a href="#" className="-m-2 p-2 block font-medium text-gray-900">
                     Sign in
                   </a>
                 </div>
+                </Link>
+                <Link to="/signup">
                 <div className="flow-root">
                   <a href="#" className="-m-2 p-2 block font-medium text-gray-900">
                     Create account
                   </a>
                 </div>
+                </Link>
               </div>
 
               <div className="border-t border-gray-200 py-6 px-4">
@@ -170,7 +174,7 @@ export default function Navbar() {
 
               {/* Logo */}
               <div className="lg:hidden ml-4 flex items-center lg:ml-0">
-                <a href="#">
+                <a href="/">
                   <span className="sr-only">Workflow</span>
                   <h1 className="font-bold text-2xl">StoreBay</h1>
                 </a>
@@ -179,7 +183,9 @@ export default function Navbar() {
               {/* Flyout menus */}
               <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
                 <div className="h-full flex space-x-8">
-                  <h1 className="font-bold text-2xl m-auto">StoreBay</h1>
+                  <Link to="/">
+                  <h1 className="font-bold text-2xl mt-4">StoreBay</h1>
+                  </Link>
                   {navigation.categories.map((category) => (
                     <Popover key={category.name} className="flex">
                       {({ open }) => (
@@ -294,7 +300,9 @@ export default function Navbar() {
                   <a href="#" className="text-sm font-medium text-gray-700 hover:text-gray-800">
                     Create account
                   </a> */}
+                  <Link to="/login">
                   <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Sign In</button>
+                  </Link>
                   {/* <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
                   <a href="#" className="text-sm font-medium text-gray-700 hover:text-gray-800">
                     Create account

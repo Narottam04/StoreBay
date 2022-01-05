@@ -7,6 +7,7 @@ import {useDispatch,useSelector} from 'react-redux'
 import {listProducts} from '../actions/productActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
+import Banner from '../components/Banner'
 
 
 const Homepage = () => {
@@ -26,6 +27,7 @@ const Homepage = () => {
     return (
         <div>
             <Navbar/> 
+            <Banner/>
             {loading ?
              <Loader/> :
               error ? <Message>{error}</Message> :  
