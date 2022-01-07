@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* font */
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,700;1,400;1,600&display=swap');
+
+.lora-font {
+    font-family: 'Lora', serif;
+}
+
 /* Spinner */
 .dots-5 {
     width:12px;

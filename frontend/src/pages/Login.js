@@ -45,7 +45,7 @@ function Login() {
     return (
         <section>
             {/* <Helmet> */}
-                <title>StoreBay: Login Page</title>
+                {/* <title>StoreBay: Login Page</title>
                 <meta name="description" content="Here on Bibliophilia,we connect you, our book lovers, directly to the sellers. In this way, you can assure everything about the book and see for yourself by having a one-to-one interaction with the seller. So what are you waiting for, sign up and boost your reading journey right away!"/>
                 <link rel="canonical" href="https://bibliophilia.pages.dev/"/>
                 <meta property="og:title" content="A Platform Where You Can Buy And Sell Your Old Books."/>
@@ -57,7 +57,7 @@ function Login() {
                 <meta property="og:type" content="ecommerce"/>
                 <meta name="language" content="EN"/>
                 <meta name="country" content="IN"/>
-                <meta name="author" content="Bibliophilia"/>
+                <meta name="author" content="Bibliophilia"/> */}
             {/* </Helmet> */}
         <div className="flex min-h-screen overflow-hidden">
         <div className="flex flex-col justify-center flex-1 px-4 py-12  sm:px-6 lg:flex-none lg:px-20 xl:px-24">
@@ -66,7 +66,7 @@ function Login() {
                 <Link to = "/" >
                     <img src="https://img.icons8.com/ios-filled/50/000000/circled-left-2.png" className = "mb-6"/>
                 </Link>
-                <a href="/" className="font-yeseva text-blue-400 text-medium">StoreBay</a>
+                <a href="/" className="lora-font text-blue-400 text-semibold text-md">StoreBay</a>
                 <h2 className="font-merriweather mt-6 text-3xl font-bold text-neutral-600"> Log In. </h2>
                 {error && <p className = "error">{error}</p> }
             </div>
@@ -138,7 +138,7 @@ function Login() {
             </div>
         </div>
         <div className="relative flex-1 hidden w-0 overflow-hidden lg:block">
-            <img className="absolute inset-0 object-cover w-full h-full" src="https://source.unsplash.com/xrbbXIXAWY0" alt="" />
+            <img className="absolute inset-0 object-cover w-full h-full" src="https://source.unsplash.com/P9LTNN1GJqk" alt="cover-image" />
         </div>
         </div>
         </section>

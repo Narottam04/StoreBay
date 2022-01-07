@@ -176,7 +176,7 @@ export default function Navbar() {
               <div className="lg:hidden ml-4 flex items-center lg:ml-0">
                 <a href="/">
                   <span className="sr-only">Workflow</span>
-                  <h1 className="font-bold text-2xl">StoreBay</h1>
+                  <h1 className="lora-font font-bold text-2xl">StoreBay</h1>
                 </a>
               </div>
 

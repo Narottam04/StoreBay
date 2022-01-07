@@ -6,10 +6,10 @@ const Rating = ({value,text}) => {
     return (
         <div className='rating '>
             <span>
-                <i className={value >= 1 ? 'fas fa-star text-yellow-300' : value >= 0.5 ? 'fas fa-star-half-alt text-yellow-300': 'far fa-star text-yellow-300' }></i>
+                <i className={value >= 1 ? `fas fa-star  text-yellow-300` : value >= 0.5 ? `fas fa-star-half-alt  text-yellow-300`: 'far fa-star text-yellow-300' }></i>
             </span>
             <span>
-                <i className={value >= 2 ? 'fas fa-star text-yellow-300' : value >= 1.5 ? 'fas fa-star-half-alt text-yellow-300': 'far fa-star text-yellow-300' }></i>
+                <i className={value >= 2 ? 'fas fa-star  text-yellow-300' : value >= 1.5 ? 'fas fa-star-half-alt text-yellow-300': 'far fa-star text-yellow-300' }></i>
             </span>
             <span>
                 <i className={value >= 3 ? 'fas fa-star text-yellow-300' : value >= 2.5 ? 'fas fa-star-half-alt text-yellow-300': 'far fa-star text-yellow-300' }></i>
