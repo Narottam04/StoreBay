@@ -3,6 +3,9 @@ import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import { HeartIcon, MenuIcon, SearchIcon, ShoppingBagIcon, XIcon } from '@heroicons/react/outline'
 import navigation from '../lib/NavCategories'
 import { Link } from 'react-router-dom'
+import {useDispatch,useSelector} from 'react-redux'
+import { logout } from '../actions/userActions'
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -10,6 +13,18 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+
+  const dispatch = useDispatch()
+  const userLogin = useSelector(state => state.userLogin)
+  const {userInfo} = userLogin
+
+  const cart = useSelector(state => state.cart)
+  const {cartItems} = cart
+
+
+  const logoutHandler =() => {
+    dispatch(logout())
+  }
 
   return (
     <div className="bg-white relative ">
@@ -300,9 +315,14 @@ export default function Navbar() {
                   <a href="#" className="text-sm font-medium text-gray-700 hover:text-gray-800">
                     Create account
                   </a> */}
-                  <Link to="/login">
-                  <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Sign In</button>
-                  </Link>
+                  {
+                    userInfo ?
+                    <button type="button" onClick={logoutHandler} class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Logout</button>
+                    :
+                    <Link to="/login">
+                    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Sign In</button>
+                    </Link>
+                  }
                   {/* <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
                   <a href="#" className="text-sm font-medium text-gray-700 hover:text-gray-800">
                     Create account
@@ -336,7 +356,7 @@ export default function Navbar() {
                       className="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
                       aria-hidden="true"
                     />
-                    <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
+                    <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{cartItems.length}</span>
                     <span className="sr-only">items in cart, view bag</span>
                   </a>
                 </Link>

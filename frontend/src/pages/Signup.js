@@ -1,70 +1,40 @@
-import React,{useRef,useState} from 'react'
-// import {useAuth} from '../../Context/AuthContext'
+import React,{useRef,useState,useEffect} from 'react'
 import { Link,useNavigate } from 'react-router-dom'
-// import { Helmet } from 'react-helmet'
+import { useDispatch, useSelector } from 'react-redux'
+import {login, register} from '../actions/userActions'
 
 function Signup() {
+    const usernameRef = useRef()
     const emailref = useRef()
     const passwordref = useRef()
     const passwordconfirmref = useRef()
 
+    const dispatch = useDispatch()
+    const userRegister = useSelector(state => state.userRegister)
+    const {loading, error,userInfo} = userRegister
+
+    const [errorMsg, setErrorMsg] = useState()
     const navigate = useNavigate()
 
-    const [error, setError] = useState('')
-    const [loading, setLoading] = useState(false)
-
-    // const {signup,curerntUser, signInWithGoogle} = useAuth()
+    
+    useEffect(() => {
+        if(userInfo) {
+            navigate('/')
+        }
+    }, [userInfo])
 
     async function handleSubmit(e) {
         e.preventDefault()
         if(passwordref.current.value !== passwordconfirmref.current.value){
-            return setError('Password do not match')
+            return setErrorMsg('Password do not match')
         }
-        try {
-            setError('')
-            setLoading(true)
-            // const userSignUp = await signup(emailref.current.value, passwordref.current.value)
-            navigate("/login")
-            // updateUserName(usernameref.current.value)
-        }
-        catch {
-            setError("Failed to create an account")
-        }
-        setLoading(false)
+        dispatch(register(usernameRef.current.value,emailref.current.value,passwordref.current.value))
     }
 
-    // async function googleSignUp(){
-    //     try {
-    //         signInWithGoogle().then(()=> {
-    //             console.log("successfully logged in")
-    //             navigate("/")
-    //         })
-    //         .catch(()=> {
-    //             setError("There was some problem redirecting")
-    //         })
-    //     }
-    //     catch{
-    //         setError("Failed to sign up :(")
-    //     }
-    // }
+
 
     return (
         <section>
-            {/* <Helmet> */}
-                <title>StoreBay: Sign Up</title>
-                <meta name="description" content="Here on Bibliophilia,we connect you, our book lovers, directly to the sellers. In this way, you can assure everything about the book and see for yourself by having a one-to-one interaction with the seller. So what are you waiting for, sign up and boost your reading journey right away!"/>
-                <link rel="canonical" href="https://bibliophilia.pages.dev/"/>
-                <meta property="og:title" content="A Platform Where You Can Buy And Sell Your Old Books."/>
-                <meta property="og:description" content="Here on Bibliophilia,we connect you, our book lovers, directly to the sellers. In this way, you can assure everything about the book and see for yourself by having a one-to-one interaction with the seller. So what are you waiting for, sign up and boost your reading journey right away!"/>
-                <meta property="og:image" content="/images/logo.png"/>
-                <meta property="og:image:width" content="2500"/>
-                <meta property="og:image:height" content="1330"/>
-                <meta property="og:site_name" content="Bibliophilia"/>
-                <meta property="og:type" content="ecommerce"/>
-                <meta name="language" content="EN"/>
-                <meta name="country" content="IN"/>
-                <meta name="author" content="Bibliophilia"/>
-            {/* </Helmet> */}
         <div className="flex min-h-screen overflow-hidden">
         <div className="flex flex-col justify-center flex-1 px-4 py-12  sm:px-6 lg:flex-none lg:px-20 xl:px-24">
             <div className="w-full max-w-xl mx-auto lg:w-96">
@@ -77,12 +47,19 @@ function Signup() {
             </div>
             <div className="mt-8">
                 <div className="mt-6">
+                {errorMsg && <p className = "error">{errorMsg}</p> }
                 {error && <p className = "error">{error}</p> }
                 <form onSubmit = {handleSubmit} className="space-y-6">
                     <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-neutral-600"> Username </label>
+                    <div className="mt-1">
+                        <input id="name" name="name" type="name" ref = {usernameRef} required placeholder="Your Username" className="block w-full px-5 py-3 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg  text-neutral-600 bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"/>
+                    </div>
+                    </div>
+                    <div>
                     <label htmlFor="email" className="block text-sm font-medium text-neutral-600"> Email address </label>
                     <div className="mt-1">
-                        <input id="email" name="email" type="email" autoComplete="email"    ref = {emailref} required placeholder="Your Email" className="block w-full px-5 py-3 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg  text-neutral-600 bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"/>
+                        <input id="email" name="email" type="email" ref = {emailref} required placeholder="Your Email" className="block w-full px-5 py-3 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg  text-neutral-600 bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"/>
                     </div>
                     </div>
                     <div className="space-y-1">
@@ -154,7 +131,7 @@ function Signup() {
             </div>
         </div>
         <div className="relative flex-1 hidden w-0 overflow-hidden lg:block">
-            <img className="absolute inset-0 object-cover w-full h-full" src="https://source.unsplash.com/lc7xcWebECc" alt="" />
+            <img className="absolute inset-0 object-cover w-full h-full" src="https://source.unsplash.com/p0j-mE6mGo4" alt="" />
         </div>
         </div>
         </section>

@@ -1,64 +1,32 @@
-import React,{useRef, useState} from 'react'
-// import {useAuth} from '../../Context/AuthContext'
+import React,{useRef, useEffect} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 // import { Helmet } from 'react-helmet'
+import { useDispatch, useSelector } from 'react-redux'
+import {login} from '../actions/userActions'
+
 function Login() {
     const emailref = useRef()
     const passwordref = useRef()
 
-    const [error, setError] = useState('')
-    const [loading, setLoading] = useState(false)
-
     const navigate = useNavigate()
 
-    // const {login,signInWithGoogle} = useAuth()
+    const dispatch = useDispatch()
+    const userLogin = useSelector(state => state.userLogin)
+    const {loading, error,userInfo} = userLogin
+
+    useEffect(() => {
+        if(userInfo) {
+            navigate('/')
+        }
+    }, [userInfo])
 
     async function handleSubmit(e) {
         e.preventDefault()
-        console.log(emailref.current.value, passwordref.current.value)
-        try {
-            setError('')
-            setLoading(true)
-            // await login(emailref.current.value, passwordref.current.value)
-            navigate("/")
-        }
-        catch {
-            setError("Failed to sign in")
-        }
-        setLoading(false)
+        // console.log(emailref.current.value, passwordref.current.value)
+        dispatch(login(emailref.current.value,passwordref.current.value))
     }
-
-    // async function googleSignUp(){
-    //     try {
-    //         signInWithGoogle().then(()=> {
-    //             console.log("successfully logged in")
-    //             navigate("/")
-    //         })
-    //         .catch(()=> {
-    //             setError("There was some problem redirecting")
-    //         })
-    //     }
-    //     catch{
-    //         setError("Failed to sign up :(")
-    //     }
-    // }
     return (
         <section>
-            {/* <Helmet> */}
-                {/* <title>StoreBay: Login Page</title>
-                <meta name="description" content="Here on Bibliophilia,we connect you, our book lovers, directly to the sellers. In this way, you can assure everything about the book and see for yourself by having a one-to-one interaction with the seller. So what are you waiting for, sign up and boost your reading journey right away!"/>
-                <link rel="canonical" href="https://bibliophilia.pages.dev/"/>
-                <meta property="og:title" content="A Platform Where You Can Buy And Sell Your Old Books."/>
-                <meta property="og:description" content="Here on Bibliophilia,we connect you, our book lovers, directly to the sellers. In this way, you can assure everything about the book and see for yourself by having a one-to-one interaction with the seller. So what are you waiting for, sign up and boost your reading journey right away!"/>
-                <meta property="og:image" content="/images/logo.png"/>
-                <meta property="og:image:width" content="2500"/>
-                <meta property="og:image:height" content="1330"/>
-                <meta property="og:site_name" content="Bibliophilia"/>
-                <meta property="og:type" content="ecommerce"/>
-                <meta name="language" content="EN"/>
-                <meta name="country" content="IN"/>
-                <meta name="author" content="Bibliophilia"/> */}
-            {/* </Helmet> */}
         <div className="flex min-h-screen overflow-hidden">
         <div className="flex flex-col justify-center flex-1 px-4 py-12  sm:px-6 lg:flex-none lg:px-20 xl:px-24">
             <div className="w-full max-w-xl mx-auto lg:w-96">
