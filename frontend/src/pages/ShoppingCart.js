@@ -20,8 +20,12 @@ function ShoppingCart() {
 
     const totalCartPrice = cartItems.reduce((acc,item) => acc + item.qty * item.price, 0).toFixed(2)
 
+    const shippingCharges = totalCartPrice > 100 ? 0 : 10;
+
+    const totalQty = cartItems.reduce((acc,item) => acc + item.qty,0)
+
     const checkoutHandler = () => {
-        console.log('proceed to checkout')
+        navigate('/shipping')
     }
 
     const removeFromCartHandler = (id) => {
@@ -94,25 +98,24 @@ function ShoppingCart() {
                                         <div>
                                             <p className="text-4xl font-black leading-9 text-gray-800">Summary</p>
                                             <div className="flex items-center justify-between pt-16">
+                                                <p className="text-base leading-none text-gray-800">Quantity</p>
+                                                <p className="text-base leading-none text-gray-800">{totalQty}
+                                                </p>
+                                            </div>
+                                            <div className="flex items-center justify-between pt-5">
                                                 <p className="text-base leading-none text-gray-800">Subtotal</p>
                                                 <p className="text-base leading-none text-gray-800">${totalCartPrice}
                                                 </p>
                                             </div>
                                             <div className="flex items-center justify-between pt-5">
                                                 <p className="text-base leading-none text-gray-800">Shipping</p>
-                                                <p className="text-base leading-none text-gray-800">${
-                                                    totalCartPrice > 100 ? 0 : 10
-                                                }</p>
+                                                <p className="text-base leading-none text-gray-800">${shippingCharges}</p>
                                             </div>
-                                            {/* <div className="flex items-center justify-between pt-5">
-                                                <p className="text-base leading-none text-gray-800">Tax</p>
-                                                <p className="text-base leading-none text-gray-800">$5</p>
-                                            </div> */}
                                         </div>
                                         <div>
                                             <div className="flex items-center pb-6 justify-between lg:pt-5 pt-20">
                                                 <p className="text-2xl leading-normal text-gray-800">Total</p>
-                                                <p className="text-2xl font-bold leading-normal text-right text-gray-800">${totalCartPrice}</p>
+                                                <p className="text-2xl font-bold leading-normal text-right text-gray-800">${Number(totalCartPrice) + Number(shippingCharges)}</p>
                                             </div>
                                             <button disabled={cartItems.length === 0} onClick={checkoutHandler}  className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
                                                 {cartItems.length === 0 ? "Add Items To Cart" : "Checkout"}
@@ -127,15 +130,18 @@ function ShoppingCart() {
                                         <div>
                                             <p className="text-4xl font-black leading-9 text-gray-800">Summary</p>
                                             <div className="flex items-center justify-between pt-16">
+                                                <p className="text-base leading-none text-gray-800">Quantity</p>
+                                                <p className="text-base leading-none text-gray-800">{totalQty}
+                                                </p>
+                                            </div>
+                                            <div className="flex items-center justify-between pt-5">
                                                 <p className="text-base leading-none text-gray-800">Subtotal</p>
                                                 <p className="text-base leading-none text-gray-800">${totalCartPrice}
                                                 </p>
                                             </div>
                                             <div className="flex items-center justify-between pt-5">
                                                 <p className="text-base leading-none text-gray-800">Shipping</p>
-                                                <p className="text-base leading-none text-gray-800">${
-                                                    totalCartPrice > 100 ? 0 : 10
-                                                }</p>
+                                                <p className="text-base leading-none text-gray-800">${shippingCharges}</p>
                                             </div>
                                             {/* <div className="flex items-center justify-between pt-5">
                                                 <p className="text-base leading-none text-gray-800">Tax</p>
@@ -145,7 +151,7 @@ function ShoppingCart() {
                                         <div>
                                             <div className="flex items-center pb-6 justify-between lg:pt-5 pt-20">
                                                 <p className="text-2xl leading-normal text-gray-800">Total</p>
-                                                <p className="text-2xl font-bold leading-normal text-right text-gray-800">${totalCartPrice}</p>
+                                                <p className="text-2xl font-bold leading-normal text-right text-gray-800">${Number(totalCartPrice) + Number(shippingCharges)}</p>
                                             </div>
                                             <button disabled={cartItems.length === 0} onClick={checkoutHandler}  className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
                                                 {cartItems.length === 0 ? "Add Items To Cart" : "Checkout"}

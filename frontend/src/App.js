@@ -5,6 +5,10 @@ import ProductScreen from './pages/ProductScreen';
 import ShoppingCart from './pages/ShoppingCart';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Shipping from './pages/Shipping';
+import Payment from './pages/Payment';
+import PlaceOrder from './pages/PlaceOrder';
+import PostOrder from './pages/PostOrder';
 
 function App() {
   return (
@@ -17,6 +21,10 @@ function App() {
           <Route path="/cart/:id" element={<ShoppingCart/>} />      
           <Route path="/cart" element={<ShoppingCart/>} />      
           <Route path="/signup" element={<Signup/>} />     
+          <Route path="/shipping" element={<Shipping/>} />     
+          <Route path="/payment" element={<Payment/>} />     
+          <Route path="/placeorder" element={<PlaceOrder/>} />     
+          <Route path="/order/:id" element={<PostOrder/>} />     
         </Routes>
       </BrowserRouter> 
     </div>
