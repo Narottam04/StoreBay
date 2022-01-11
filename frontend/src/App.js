@@ -10,6 +10,8 @@ import Payment from './pages/Payment';
 import PlaceOrder from './pages/PlaceOrder';
 import PostOrder from './pages/PostOrder';
 import Profile from './pages/Profile';
+import AdminUserList from './pages/AdminUserList';
+import AdminEditUser from './pages/AdminEditUser';
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
           <Route path="/placeorder" element={<PlaceOrder/>} />     
           <Route path="/profile" element={<Profile/>} />     
           <Route path="/order/:id" element={<PostOrder/>} />     
+          <Route path="/admin" element={<AdminUserList/>} />      
+          <Route path="/admin/user/:id/edit" element={<AdminEditUser/>} />      
         </Routes>
       </BrowserRouter> 
     </div>

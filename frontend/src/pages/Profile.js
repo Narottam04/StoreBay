@@ -152,18 +152,14 @@ function Profile() {
                   {
                       order.orderItems.map(item => (
                           <div key={item.product} className="flex md:flex-row justify-start items-start md:items-center  border border-gray-200 w-full">
-                              {/* <div className="w-40 md:w-32">
-                                  <img className="hidden md:block" src={item.image} alt="customer-products" />
-                                  <img className="md:hidden " src={item.image} alt="customer-products" />
-                              </div> */}
                               <div className="flex justify-start md:justify-between items-start md:items-center  flex-col md:flex-row w-full p-4 md:px-8">
                                   <div className="flex flex-col md:flex-shrink-0  justify-start items-start">
                                       <h3 className="text-lg md:text-xl  w-full font-semibold leading-6 md:leading-5  text-gray-800">{item.name}</h3>
-                                      <div className="flex flex-row justify-start  space-x-4 md:space-x-6 items-start mt-4 ">
+                                      <div className="flex flex-row justify-start  space-x-4 md:space-x-6 items-start mt-4  ">
                                         {
                                               order.isPaid ?
-                                              <p className="text-sm leading-none  text-gray-800 font-semibold">
-                                              Payment Status: <span className="text-green-700 bg-green-100 rounded-lg ">Paid on {order.paidAt}</span>
+                                              <p className="text-sm leading-none  text-gray-800 font-semibold ">
+                                              Payment Status: <span className="text-green-700  bg-green-100 rounded-lg ">Paid on {order.paidAt}</span>
                                               </p>
                                               :
                                               <p className="text-sm leading-none  text-gray-800 font-semibold">
