@@ -8,7 +8,6 @@ import {listProducts} from '../actions/productActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import Banner from '../components/Banner'
-import Profile from '../components/Profile'
 
 
 const Homepage = () => {
@@ -28,7 +27,6 @@ const Homepage = () => {
     return (
         <div>
             <Navbar/>
-            <Profile/> 
             <Banner/>
             {loading ?
              <Loader/> :
