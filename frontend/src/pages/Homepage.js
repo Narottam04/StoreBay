@@ -2,7 +2,6 @@ import React,{useEffect} from 'react'
 import { Footer } from '../components/Footer'
 import Navbar from '../components/Navbar'
 import Product from '../components/Product'
-
 import {useDispatch,useSelector} from 'react-redux'
 import {listProducts} from '../actions/productActions'
 import Loader from '../components/Loader'
@@ -22,7 +21,6 @@ const Homepage = () => {
         // to fetch the data  we need to set proxy in package.json
         dispatch(listProducts())
     },[dispatch])
-
 
     return (
         <div>
