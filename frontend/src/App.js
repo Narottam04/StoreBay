@@ -12,6 +12,9 @@ import PostOrder from './pages/PostOrder';
 import Profile from './pages/Profile';
 import AdminUserList from './pages/AdminUserList';
 import AdminEditUser from './pages/AdminEditUser';
+import AdminProductList from './pages/AdminProductList';
+import AdminCreateProduct from './pages/AdminCreateProduct';
+import AdminOrdersList from './pages/AdminOrdersList';
 
 function App() {
   return (
@@ -30,7 +33,10 @@ function App() {
           <Route path="/profile" element={<Profile/>} />     
           <Route path="/order/:id" element={<PostOrder/>} />     
           <Route path="/admin" element={<AdminUserList/>} />      
+          <Route path="/admin/productlist" element={<AdminProductList/>} />      
           <Route path="/admin/user/:id/edit" element={<AdminEditUser/>} />      
+          <Route path="/admin/product/:id/edit" element={<AdminCreateProduct/>} />      
+          <Route path="/admin/orderlist" element={<AdminOrdersList/>} />      
         </Routes>
       </BrowserRouter> 
     </div>

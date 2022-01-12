@@ -5,37 +5,30 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
 import { deleteUser, listUsers } from '../actions/userActions'
 import { Link,useNavigate } from 'react-router-dom'
+import { listOrders } from "../actions/orderActions";
 
-const AdminUserList = () => {
+const AdminOrdersList = () => {
     
     const [openSidebar,setOpenSidebar] = useState(false)
     const navigate = useNavigate()
 
     const dispatch = useDispatch()
-    const userList = useSelector(state => state.userList)
-    const {loading, error,users} = userList
+    const orderList = useSelector(state => state.orderList)
+    const {loading, error,orders} = orderList
 
     const userLogin = useSelector(state => state.userLogin)
     const {userInfo} = userLogin
-    
-    const userDelete = useSelector(state => state.userDelete)
-    const {success:successDelete} = userDelete
 
     useEffect(()=> {
-        dispatch(listUsers())
-        // if(userInfo && userInfo.isAdmin){
-        // }
-        // else {
-        //     navigate('/')
-        // }
-
-    },[dispatch,successDelete,userInfo])
-
-    const deleteHandler = (id) => {
-        if(window.confirm('Are you sure')) {
-            dispatch(deleteUser(id))
+        if(userInfo && userInfo.isAdmin){
+            dispatch(listOrders())
         }
-    }
+        else {
+            navigate('/')
+        }
+
+    },[dispatch,userInfo])
+
 
     return (
         <div className="flex flex-row min-h-screen bg-gray-100 text-gray-800 md:overflow-x-hidden">
@@ -70,7 +63,7 @@ const AdminUserList = () => {
                     </div>
                 </header>
                 <div className="main-content flex flex-col flex-grow p-4">
-                    <h1 className="font-bold text-2xl text-gray-700 mb-6">User Profile</h1>
+                    <h1 className="font-bold text-2xl text-gray-700 mb-6">Customer Orders</h1>
                     {/* table */}
                     {
                         loading ? <Loader/> : error ? <p>{error}</p>
@@ -86,7 +79,7 @@ const AdminUserList = () => {
                                         scope="col"
                                         className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                     >
-                                        User Id
+                                        Product Id
                                     </th>
                                     <th
                                         scope="col"
@@ -98,7 +91,25 @@ const AdminUserList = () => {
                                         scope="col"
                                         className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                     >
-                                        Admin
+                                        Date
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                    >
+                                        Total Price
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                    >
+                                        Paid
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                    >
+                                        Delivered
                                     </th>
                                     <th scope="col" className="relative px-6 py-3">
                                         <span className="sr-only">Edit</span>
@@ -106,43 +117,63 @@ const AdminUserList = () => {
                                     </tr>
                                 </thead>
                                 <tbody className="bg-white divide-y divide-gray-200">
-                                    {users.map((user) => (
-                                    <tr key={user._id}>
+                                    {orders.map((order) => (
+                                    <tr key={order._id}>
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-gray-800">
-                                            {user._id}
+                                            {order._id}
                                             </span>
                                         </td>
 
                                         <td className="px-6 py-4 whitespace-nowrap">
                                         <div className="flex items-center">
                                             <div className="flex-shrink-0 h-10 w-10">
-                                            <img className="h-10 w-10 rounded-full" src={`https://avatars.dicebear.com/api/initials/${user.name}.svg`} alt="avatar" />
+                                            <img className="h-10 w-10 rounded-full" src={`https://avatars.dicebear.com/api/initials/${order.user ? order.user.name: "Anonymous"}.svg`} alt="avatar" />
                                             </div>
                                             <div className="ml-4">
-                                            <div className="text-sm font-medium text-gray-900">{user.name}</div>
-                                            <div className="text-sm text-gray-500">{user.email}</div>
-                                            <div className="text-sm text-gray-500">{user._id}</div>
+                                            <div className="text-sm font-medium text-gray-900">{order.user && order.user.name}</div>
+                                            <div className="text-sm text-gray-500">{order.user && order.user.email}</div>
+                                            </div>
+                                        </div>
+                                        </td>
+
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                        <div className="flex items-center">
+                                            <div className="flex-shrink-0 h-10 w-10">
+                                                <div className="text-sm text-gray-500">{order.createdAt.substring(0,10)}</div>
+                                            </div>
+                                        </div>
+                                        </td>
+
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                        <div className="flex items-center">
+                                            <div className="flex-shrink-0 h-10 w-10">
+                                                <div className="text-sm text-gray-500">${order.totalPrice}</div>
                                             </div>
                                         </div>
                                         </td>
 
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             {
-                                                user.isAdmin ?
-                                                <p className="text-sm w-20 text-green-700 bg-green-100 rounded-lg px-2 py-1">Admin</p>
+                                                order.isPaid ?
+                                                <p className="text-sm w-20 text-green-700 bg-green-100 rounded-lg px-2 py-1">Paid at {order.paidAt.substring(0,10)}</p>
                                                 :
-                                                <p className="text-sm text-red-700 w-28 bg-red-100 rounded-lg px-2 py-1">Not Admin</p>
+                                                <p className="text-sm text-red-700 w-28 bg-red-100 rounded-lg px-2 py-1">Not Paid</p>
+                                            }
+                                        </td>
+
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            {
+                                                order.isDelivered ?
+                                                <p className="text-sm w-20 text-green-700 bg-green-100 rounded-lg px-2 py-1">Delivered at {order.deliveredAt.substring(0,10)}</p>
+                                                :
+                                                <p className="text-sm text-red-700 w-28 bg-red-100 rounded-lg px-2 py-1">Not Delivered</p>
                                             }
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex space-x-2">
-                                            <Link to={`/admin/user/${user._id}/edit`} className="text-indigo-600 hover:text-indigo-900">
-                                            Edit
+                                            <Link to={`/order/${order._id}/`} className="text-indigo-600 hover:text-indigo-900">
+                                            Order Details
                                             </Link>
-                                            <a href="#" className="text-red-600 hover:text-red-900" onClick={()=> deleteHandler(user._id)}>
-                                            Delete
-                                            </a>
-                                        
                                         </td>
                                     </tr>
                                     ))}
@@ -166,5 +197,5 @@ const AdminUserList = () => {
     )
 }
 
-export default AdminUserList
+export default AdminOrdersList
 

@@ -5,9 +5,9 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { Footer } from '../components/Footer'
 import Navbar from '../components/Navbar'
-import { getOrderDetails, payOrderDetails } from "../actions/orderActions";
+import { deliverOrderDetails, getOrderDetails, payOrderDetails } from "../actions/orderActions";
 import Loader from "../components/Loader";
-import { ORDER_PAY_RESET } from "../constants/orderConstants";
+import { ORDER_PAY_RESET,ORDER_DELIVER_RESET } from "../constants/orderConstants";
 
 
 const PostOrder = () => {
@@ -22,9 +22,17 @@ const PostOrder = () => {
 
     const orderPay = useSelector(state => state.orderPay)
     const {loading:loadingPay, success:successPay } = orderPay
+
+    const orderDeliver = useSelector(state => state.orderDeliver)
+    const {loading:loadingDeliver, success:successDeliver } = orderDeliver
     
+    const userLogin = useSelector(state => state.userLogin)
+    const {userInfo} = userLogin
 
     useEffect(() => {
+        if(!userInfo) {
+            navigate('/')
+        }
         const addPayPalScript = async () => {
             const {data: clientId} = await axios.get('/api/config/paypal')
             const script = document.createElement('script')
@@ -37,8 +45,9 @@ const PostOrder = () => {
             document.body.appendChild(script)
         }
 
-        if(!order || successPay) {
+        if(!order || successPay || successDeliver) {
             dispatch({type: ORDER_PAY_RESET})
+            dispatch({type: ORDER_DELIVER_RESET})
             dispatch(getOrderDetails(id))
         }
         else if(!order.isPaid) {
@@ -49,11 +58,15 @@ const PostOrder = () => {
                 setSdkReady(true)
             }
         }
-    },[dispatch,id,successPay,order])
+    },[dispatch,id,successPay,successDeliver,order])
 
     const successPaymentHandler = (paymentResult) => {
         console.log(paymentResult)
         dispatch(payOrderDetails(id,paymentResult))
+    }
+
+    const deliverHandler = () => {
+        dispatch(deliverOrderDetails(order))
     }
 
     return loading ? <Loader/> : error ? <p>{error}</p>: 
@@ -87,7 +100,7 @@ const PostOrder = () => {
                         {
                             order.isPaid ?
                             <p className="text-base leading-none mt-4 text-gray-800 font-semibold">
-                            Order Payment Status: <span className="text-green-700 bg-green-100 rounded-lg px-2 py-1">Paid on {order.paidAt}</span>
+                            Order Payment Status: <span className="text-green-700 bg-green-100 rounded-lg px-2 py-1">Paid on {order.paidAt.substring(0,10)}</span>
                             </p>
                             :
                             <p className="text-base leading-none mt-4 text-gray-800 font-semibold">
@@ -97,13 +110,20 @@ const PostOrder = () => {
                         {
                             order.isDelivered ?
                             <p className="text-base leading-none mt-4 text-gray-800 font-semibold">
-                            Order Delivery Status: <span className="text-green-700 bg-green-100 rounded-lg px-2 py-1">Paid on {order.delivered}</span>
+                            Order Delivery Status: <span className="text-green-700 bg-green-100 rounded-lg px-2 py-1">Delivered on {order.deliveredAt.substring(0,10)}</span>
                             </p>
                             :
                             <p className="text-base leading-none mt-4 text-gray-800 font-semibold">
                                 Order Delivery Status: <span className=" text-red-700 bg-red-100 rounded-lg px-2 py-1">Not Delivered</span>
                             </p>
                         }
+                        {loadingDeliver && <p>Loading delivery status update button...</p>}
+                        {
+                            userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                                <button type="button" class="mt-5 text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" onClick={deliverHandler}>Order Delivered Successfully</button>
+                            )
+                        }
+                        {/* for Admin Users */}
                         <div className="flex justify-center items-center w-full mt-8  flex-col space-y-4 ">
                             {/* products */}
                             {
