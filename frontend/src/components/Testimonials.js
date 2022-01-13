@@ -14,7 +14,7 @@ function Testimonials() {
                         <img src="https://cdn.tuk.dev/assets/components/26May-update/quote.png" aria-hidden="true" />
                         <div className="pl-4 pt-4 flex items-start justify-between">
                             <div className="mr-6">
-                                <p className="xl:text-xl xl:leading-loose text-gray-600">This website has a bunch of amazing components which improves my design</p>
+                                <p className="xl:text-xl xl:leading-loose text-gray-600">This website has a bunch of amazing products which is cheaper than any other store.</p>
                                 <p className="mt-4 text-base font-semibold leading-none text-gray-800">Anna Smith</p>
                             </div>
                             <img src="https://cdn.tuk.dev/assets/components/26May-update/avatar-1.png" alt="Display Avatar of Anna Smith" role="img" />
@@ -24,7 +24,7 @@ function Testimonials() {
                         <img src="https://cdn.tuk.dev/assets/components/26May-update/quote.png" aria-hidden="true" />
                         <div className="pl-4 pt-4 flex items-start justify-between">
                             <div className="mr-6">
-                                <p className="xl:text-xl xl:leading-loose text-gray-600">This website has a bunch of amazing components which improves my design</p>
+                                <p className="xl:text-xl xl:leading-loose text-gray-600">This website is very to operate and the navigation between the pages is very fast.</p>
                                 <p className="mt-4 text-base font-semibold leading-none text-gray-800">Dany John</p>
                             </div>
                             <img src="https://cdn.tuk.dev/assets/components/26May-update/avatar-2.png" alt="Display avatar of Dany John" role="img" />
@@ -34,7 +34,7 @@ function Testimonials() {
                         <img src="https://cdn.tuk.dev/assets/components/26May-update/quote.png" aria-hidden="true" />
                         <div className="pl-4 pt-4 flex items-start justify-between">
                             <div className="mr-6">
-                                <p className="xl:text-xl xl:leading-loose text-gray-600">This website has a bunch of amazing components which improves my design</p>
+                                <p className="xl:text-xl xl:leading-loose text-gray-600">Best website to buy products without any headache also payment method is simple and seemless.</p>
                                 <p className="mt-4 text-base font-semibold leading-none text-gray-800">Mike Blake</p>
                             </div>
                             <img src="https://cdn.tuk.dev/assets/components/26May-update/avatar-3.png" alt="Display Avatar of Mike Blake" role="img" />
