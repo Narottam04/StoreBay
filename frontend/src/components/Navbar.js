@@ -359,7 +359,7 @@ export default function Navbar() {
                 </Link>
 
                 {/* profile */}
-                <NavbarDropdown userInfo ={userInfo}/>
+                {userInfo && <NavbarDropdown userInfo ={userInfo}/> }
 
               </div>
             </div>

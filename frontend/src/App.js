@@ -15,6 +15,7 @@ import AdminEditUser from './pages/AdminEditUser';
 import AdminProductList from './pages/AdminProductList';
 import AdminCreateProduct from './pages/AdminCreateProduct';
 import AdminOrdersList from './pages/AdminOrdersList';
+import CategoryPage from './pages/CategoryPage';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/payment" element={<Payment/>} />     
           <Route path="/placeorder" element={<PlaceOrder/>} />     
           <Route path="/profile" element={<Profile/>} />     
+          <Route path="/category" element={<CategoryPage/>} />     
           <Route path="/order/:id" element={<PostOrder/>} />     
           <Route path="/admin" element={<AdminUserList/>} />      
           <Route path="/admin/productlist" element={<AdminProductList/>} />      
