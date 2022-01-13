@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import ProductReview from "./ProductReview";
 import Rating from "./Rating";
 
@@ -35,7 +35,7 @@ const ProductDetailsUI = ({product}) => {
                 {/* <!-- Description Div --> */}
 
                 <div className="  w-full sm:w-96 md:w-8/12 lg:w-6/12 items-center">
-                    <p className=" focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 font-normal text-base leading-4 text-gray-600">Home / Furniture / Wooden Stool</p>
+                    <p className=" focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 font-normal text-base leading-4 text-gray-600"><Link className="underline" to={'/'}>Home</Link>/ <Link className="underline" to={'/category'}>Product</Link> / {product.name}</p>
                     <h2 className="font-semibold lg:text-4xl text-3xl lg:leading-9 leading-7 text-gray-800 mt-4">{product.name}</h2>
 
                     <div className=" flex flex-row justify-between  mt-5">
@@ -82,7 +82,7 @@ const ProductDetailsUI = ({product}) => {
 
                 <div className=" w-full sm:w-96 md:w-8/12  lg:w-6/12 flex lg:flex-row flex-col lg:gap-8 sm:gap-6 gap-4">
                     <div className=" w-full bg-white flex justify-center items-center">
-                        <img src={product.image} alt="Wooden Chair Previw" />
+                        <img src={product.image} alt="product image" />
                     </div>
                     
                 </div>

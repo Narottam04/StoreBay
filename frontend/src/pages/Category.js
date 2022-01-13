@@ -4,35 +4,55 @@ import Navbar from '../components/Navbar'
 import {useDispatch,useSelector} from 'react-redux'
 import Loader from '../components/Loader'
 import Product from '../components/Product'
-import { listProducts } from '../actions/productActions'
+import { getCategoryProduct, listProducts } from '../actions/productActions'
+import { useParams } from 'react-router-dom'
 
-const CategoryPage = () => {
+
+const categories = [
+    "Laptop",
+    "Mobile",
+    "Headphone",
+    "Keyboard",
+    "Mouse",
+    "Camera",
+    "Playstation",
+  ];
+
+const brand = [
+    "Apple",
+    "Logitech",
+    "Canon",
+    "Amazon",
+  ];
+
+const Category = () => {
     const [toggle,setToggle] = useState(false)
-    const [categoryId,setCategoryId] = useState([])
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [price, setPrice] = useState([0, 25000]);
+    const [minPrice, setMinPrice] = useState(0);
+    const [maxPrice, setMaxPrice] = useState(0);
+    const [category, setCategory] = useState("");
+
+    const [ratings, setRatings] = useState(0);
+
+    const {keyword} = useParams()
+
     const dispatch = useDispatch()
-    const productList = useSelector(state => state.productList)
-    const {loading, error, products} = productList
+    const categoryProductList = useSelector(state => state.categoryProductList)
+    const {loading, error, products,productsCount,resultPerPage,filteredProductsCount} = categoryProductList
 
-    const brand = []
-    const category = []
-    if(products){
-        products.map(item => {
-            if (brand.indexOf(item.brand) === -1) {
-                brand.push(item.brand)
-            }
-            if (category.indexOf(item.category) === -1) {
-                category.push(item.category)
-            }
-        } )
-    }
-
-    const handleSubmit = (e) => {
-        
-    }
+    console.log(products)
 
     useEffect(()=> {
-        dispatch(listProducts())
-    },[dispatch])
+        dispatch(getCategoryProduct(keyword, currentPage, price, category, ratings))
+    },[dispatch, keyword, currentPage, price, category, ratings])
+
+    // const handleSubmit = (e) => {
+    //     e.preventDefault()
+    //     setPrice([Number(minPrice),Number(maxPrice)])
+    //     console.log(price)
+    // }
 
     return (
         <>
@@ -62,8 +82,8 @@ const CategoryPage = () => {
             {/* filter desktop view */}
             <div className="flex justify-center lg:justify-start">
                 <aside className = "hidden lg:block border-x-4 sticky self-start  top-4 w-1/5">
-                    <form onSubmit={handleSubmit}>
-                        <div className="space-y-2 mx-12 my-6">
+                    <form >
+                        {/* <div className="space-y-2 mx-12 my-6">
                             <h1 className = " font-semibold text-lg ">FILTERS</h1>
                             <h2 className = " font-semibold text-lg text-gray-500">Brands</h2>
                                 {loading ?
@@ -72,22 +92,35 @@ const CategoryPage = () => {
                                     <div className="flex flex-col">
                                         {brand.map(item => (
                                             <label className="cursor-pointer inline-flex items-center mt-3">
-                                                <input type="checkbox"  className=" h-5 w-5 text-gray-600 " name='category' value={item}  id = {item} onClick={()=> setCategoryId(prevState=> [...prevState,item] )} />
+                                                <input type="checkbox"  className=" h-5 w-5 text-gray-600 " name='category' value={item}  id = {item} />
                                             <span className="ml-2 text-gray-700">{item}</span>
                                             </label>
                                         ))}
                                     </div>
                                 } 
+                        </div> */}
+                        <div className="space-y-2 mx-12 my-6">
+                            <h2 className = " font-semibold text-lg text-gray-500">Categories</h2>
+                            <div className=''>
+                                <div class="mb-6">
+                                    <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 ">Min Price</label>
+                                    <input type="text" id="base-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "  onChange={(e)=> setMinPrice(e.target.value)}/>
+                                </div>
+                                <div class="mb-6">
+                                    <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 ">Max Price</label>
+                                    <input type="text" id="base-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "  onChange={(e)=> setMaxPrice(e.target.value)} />
+                                </div>
+                            </div>
                         </div>
                         <div className="space-y-2 mx-12 my-6">
-                            <h2 className = " font-semibold text-lg text-gray-500">Brands</h2>
+                            <h2 className = " font-semibold text-lg text-gray-500">Categories</h2>
                                 {loading ?
                                     <p>Loading category...</p> :
                                     error ? <p>{error}</p> :  
                                     <div className="flex flex-col">
-                                        {category.map(item => (
+                                        {categories.map(item => (
                                             <label className=" cursor-pointer inline-flex items-center mt-3">
-                                                <input type="checkbox"  className=" h-5 w-5 text-gray-600 "/>
+                                                <input type="checkbox"  className=" h-5 w-5 text-gray-600" onClick={() => setCategory(item)} />
                                             <span className="ml-2 text-gray-700" >{item}</span>
                                             </label>
                                         ))}
@@ -121,4 +154,4 @@ const CategoryPage = () => {
     )
 }
 
-export default CategoryPage
+export default Category

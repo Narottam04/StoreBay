@@ -17,6 +17,7 @@ import AdminCreateProduct from './pages/AdminCreateProduct';
 import AdminOrdersList from './pages/AdminOrdersList';
 import CategoryPage from './pages/CategoryPage';
 import ScrollToTop from './components/ScrollToTop';
+import Category from './pages/Category';
 
 function App() {
   

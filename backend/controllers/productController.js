@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler'
 import Product from '../models/productModel.js'
+import {ApiFeatures} from '../utils/apiFeatures.js'
 
 // @desc fetch all products
 // @route GET /api/products
@@ -8,6 +9,35 @@ const getProducts = asyncHandler(async(req,res) => {
     const products = await Product.find({})
     res.json(products)
 })
+
+// @desc  fetch products for categories page
+// @route GET /api/products/category
+// @access Public
+  const getCategoryProducts = asyncHandler(async (req, res, next) => {
+    const resultPerPage = 3;
+    const productsCount = await Product.countDocuments();
+  
+    const apiFeature = new ApiFeatures(Product.find(), req.query)
+      .search()
+      .filter();
+  
+    let products = await apiFeature.query;
+  
+    let filteredProductsCount = products.length;
+  
+    apiFeature.pagination(resultPerPage);
+    
+    products = await apiFeature.query.clone();
+
+    res.status(200).json({
+      success: true,
+      products,
+      productsCount,
+      resultPerPage,
+      filteredProductsCount,
+    });
+});
+
 
 // @desc fetch single products
 // @route GET /api/products/:id
@@ -128,5 +158,6 @@ export {
     deleteProduct,
     createProduct,
     updateProduct,
-    createProductReview
+    createProductReview,
+    getCategoryProducts
 }
