@@ -7,7 +7,7 @@ import {listProducts} from '../actions/productActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import Header from '../components/Header'
-import MainPageCategory from '../components/MainPageCategory'
+// import MainPageCategory from '../components/MainPageCategory'
 import Testimonials from '../components/Testimonials'
 
 
@@ -43,7 +43,6 @@ const Homepage = () => {
                 </div>
                 </div>
             }
-            <MainPageCategory/>
             <Testimonials/>
             <Footer/>
         </div>
