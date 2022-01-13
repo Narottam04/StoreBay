@@ -81,7 +81,7 @@ const ProductDetailsUI = ({product}) => {
                 {/* <!-- Preview Images Div For larger Screen--> */}
 
                 <div className=" w-full sm:w-96 md:w-8/12  lg:w-6/12 flex lg:flex-row flex-col lg:gap-8 sm:gap-6 gap-4">
-                    <div className=" w-full bg-gray-100 flex justify-center items-center">
+                    <div className=" w-full bg-white flex justify-center items-center">
                         <img src={product.image} alt="Wooden Chair Previw" />
                     </div>
                     

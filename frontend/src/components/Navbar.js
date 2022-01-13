@@ -1,11 +1,12 @@
 import { Fragment, useState } from 'react'
-import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
-import { HeartIcon, MenuIcon, SearchIcon, ShoppingBagIcon, XIcon } from '@heroicons/react/outline'
+import { Dialog, Menu, Popover, Tab, Transition } from '@headlessui/react'
+import { ChevronDownIcon, HeartIcon, MenuIcon, SearchIcon, ShoppingBagIcon, XIcon } from '@heroicons/react/outline'
 import navigation from '../lib/NavCategories'
 import { Link } from 'react-router-dom'
 import {useDispatch,useSelector} from 'react-redux'
 import { logout } from '../actions/userActions'
 import Search from './Search'
+import NavbarDropdown from './NavbarDropdown'
 
 
 function classNames(...classes) {
@@ -356,6 +357,10 @@ export default function Navbar() {
                     <span className="sr-only">items in cart, view bag</span>
                   </a>
                 </Link>
+
+                {/* profile */}
+                <NavbarDropdown userInfo ={userInfo}/>
+
               </div>
             </div>
           </div>
