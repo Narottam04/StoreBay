@@ -16,11 +16,15 @@ import AdminProductList from './pages/AdminProductList';
 import AdminCreateProduct from './pages/AdminCreateProduct';
 import AdminOrdersList from './pages/AdminOrdersList';
 import CategoryPage from './pages/CategoryPage';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
+  
+
   return (
     <div className="App">
       <BrowserRouter>
+        <ScrollToTop/>
         <Routes>
           <Route path="/" element={<Homepage/>} />      
           <Route path="/product/:id" element={<ProductScreen/>} /> 
