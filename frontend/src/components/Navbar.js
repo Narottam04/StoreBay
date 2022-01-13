@@ -5,6 +5,7 @@ import navigation from '../lib/NavCategories'
 import { Link } from 'react-router-dom'
 import {useDispatch,useSelector} from 'react-redux'
 import { logout } from '../actions/userActions'
+import Search from './Search'
 
 
 function classNames(...classes) {
@@ -299,12 +300,7 @@ export default function Navbar() {
               </Popover.Group>
                     
             {/* search button */}
-            <div className='hidden  bg-white lg:flex items-center  left-1/2  '>
-                <div className='flex items-center w-full lg:w-[40vw]   px-4 rounded-xl bg-gray-200 text-gray-800 py-2 '>
-                    <input  type="text" className="bg-gray-200 text-gray-800 pl-4 focus:outline-none flex-grow" placeholder='Search products'/>
-                    <SearchIcon className="text-[#B1B3B5] w-8 "/>
-                </div>
-            </div>
+            <Search/>
 
               <div className=" flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
@@ -347,7 +343,7 @@ export default function Navbar() {
                     <span className="sr-only">Search</span>
                     <HeartIcon className="w-6 h-6" aria-hidden="true" />
                   </a>
-                </div>
+                </div> 
 
                 {/* Cart */}
                 <Link to="/cart" className="ml-4 flow-root lg:ml-6">
