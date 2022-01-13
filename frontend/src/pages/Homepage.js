@@ -6,7 +6,9 @@ import {useDispatch,useSelector} from 'react-redux'
 import {listProducts} from '../actions/productActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import Banner from '../components/Banner'
+import Header from '../components/Header'
+import MainPageCategory from '../components/MainPageCategory'
+import Testimonials from '../components/Testimonials'
 
 
 const Homepage = () => {
@@ -25,7 +27,7 @@ const Homepage = () => {
     return (
         <div>
             <Navbar/>
-            <Banner/>
+            <Header/>
             {loading ?
              <Loader/> :
               error ? <Message>{error}</Message> :  
@@ -41,6 +43,8 @@ const Homepage = () => {
                 </div>
                 </div>
             }
+            <MainPageCategory/>
+            <Testimonials/>
             <Footer/>
         </div>
     )
