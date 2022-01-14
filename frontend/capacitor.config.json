@@ -1,0 +1,6 @@
+{
+  "appId": "com.storebay.android",
+  "appName": "storebay",
+  "webDir": "build",
+  "bundledWebRuntime": false
+}
